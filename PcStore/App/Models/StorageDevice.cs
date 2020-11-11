@@ -1,6 +1,6 @@
 namespace App.Models
 {
-Added Cooler initial propertiesGrapgh    using App.Enumerations;
+    using App.Enumerations;
 
     public class StorageDevice
     {
