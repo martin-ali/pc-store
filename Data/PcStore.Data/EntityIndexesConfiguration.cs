@@ -2,9 +2,9 @@
 {
     using System.Linq;
 
-    using PcStore.Data.Common.Models;
-
     using Microsoft.EntityFrameworkCore;
+
+    using PcStore.Data.Common.Models;
 
     internal static class EntityIndexesConfiguration
     {

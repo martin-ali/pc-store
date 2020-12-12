@@ -3,9 +3,9 @@ namespace PcStore.Data.Models
 {
     using System;
 
-    using PcStore.Data.Common.Models;
-
     using Microsoft.AspNetCore.Identity;
+
+    using PcStore.Data.Common.Models;
 
     public class ApplicationRole : IdentityRole, IAuditInfo, IDeletableEntity
     {

@@ -2,9 +2,9 @@
 {
     using System.Diagnostics;
 
-    using PcStore.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
+
+    using PcStore.Web.ViewModels;
 
     public class HomeController : BaseController
     {

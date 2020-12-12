@@ -3,9 +3,9 @@
     using System;
     using System.Threading.Tasks;
 
-    using PcStore.Data.Common;
-
     using Microsoft.EntityFrameworkCore;
+
+    using PcStore.Data.Common;
 
     public class DbQueryRunner : IDbQueryRunner
     {

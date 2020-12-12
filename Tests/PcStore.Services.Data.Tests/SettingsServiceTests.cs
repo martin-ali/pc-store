@@ -4,14 +4,14 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using Microsoft.EntityFrameworkCore;
+
+    using Moq;
+
     using PcStore.Data;
     using PcStore.Data.Common.Repositories;
     using PcStore.Data.Models;
     using PcStore.Data.Repositories;
-
-    using Microsoft.EntityFrameworkCore;
-
-    using Moq;
 
     using Xunit;
 

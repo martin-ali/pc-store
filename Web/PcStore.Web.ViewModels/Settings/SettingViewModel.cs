@@ -1,9 +1,9 @@
 ﻿namespace PcStore.Web.ViewModels.Settings
 {
+    using AutoMapper;
+
     using PcStore.Data.Models;
     using PcStore.Services.Mapping;
-
-    using AutoMapper;
 
     public class SettingViewModel : IMapFrom<Setting>, IHaveCustomMappings
     {
