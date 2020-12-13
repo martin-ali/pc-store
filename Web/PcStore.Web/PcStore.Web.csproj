@@ -36,4 +36,15 @@
     <ProjectReference Include="..\PcStore.Web.Infrastructure\PcStore.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\PcStore.Web.ViewModels\PcStore.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Products\Controllers\" />
+    <Folder Include="Areas\Products\Data\" />
+    <Folder Include="Areas\Products\Models\" />
+    <Folder Include="Areas\Products\Views\" />
+    <Folder Include="Areas\Reviews\Controllers\" />
+    <Folder Include="Areas\Reviews\Data\" />
+    <Folder Include="Areas\Reviews\Models\" />
+    <Folder Include="Areas\Reviews\Views\" />
+  </ItemGroup>
 </Project>
