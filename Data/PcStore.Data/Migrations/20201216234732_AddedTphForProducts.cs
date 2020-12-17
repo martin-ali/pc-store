@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PcStore.Data.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class AddedTphForProducts : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -69,24 +69,6 @@ namespace PcStore.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Brands", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Processors",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CreatedOn = table.Column<DateTime>(nullable: false),
-                    ModifiedOn = table.Column<DateTime>(nullable: true),
-                    IsDeleted = table.Column<bool>(nullable: false),
-                    DeletedOn = table.Column<DateTime>(nullable: true),
-                    CoresCount = table.Column<int>(nullable: false),
-                    ClockFrequency = table.Column<float>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Processors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,9 +205,12 @@ namespace PcStore.Data.Migrations
                     ModifiedOn = table.Column<DateTime>(nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false),
                     DeletedOn = table.Column<DateTime>(nullable: true),
-                    Model = table.Column<string>(nullable: true),
-                    BrandId = table.Column<int>(nullable: true),
-                    Price = table.Column<decimal>(type: "decimal(18, 4)", nullable: false)
+                    Model = table.Column<string>(nullable: false),
+                    BrandId = table.Column<int>(nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18, 4)", nullable: false),
+                    ProductType = table.Column<string>(nullable: false),
+                    CoresCount = table.Column<int>(nullable: true),
+                    ClockFrequency = table.Column<float>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -325,11 +310,6 @@ namespace PcStore.Data.Migrations
                 column: "IsDeleted");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Processors_IsDeleted",
-                table: "Processors",
-                column: "IsDeleted");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
                 table: "Products",
                 column: "BrandId");
@@ -376,9 +356,6 @@ namespace PcStore.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
-                name: "Processors");
 
             migrationBuilder.DropTable(
                 name: "Reviews");

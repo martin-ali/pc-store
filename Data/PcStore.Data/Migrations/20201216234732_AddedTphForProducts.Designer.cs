@@ -10,8 +10,8 @@ using PcStore.Data;
 namespace PcStore.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201212195558_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20201216234732_AddedTphForProducts")]
+    partial class AddedTphForProducts
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -132,7 +132,7 @@ namespace PcStore.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("BrandId")
+                    b.Property<int>("BrandId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
@@ -145,6 +145,7 @@ namespace PcStore.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("Model")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("ModifiedOn")
@@ -153,6 +154,10 @@ namespace PcStore.Data.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 4)");
 
+                    b.Property<string>("ProductType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BrandId");
@@ -160,6 +165,8 @@ namespace PcStore.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Products");
+
+                    b.HasDiscriminator<string>("ProductType").HasValue("product");
                 });
 
             modelBuilder.Entity("PcStore.Data.Models.ApplicationRole", b =>
@@ -311,38 +318,6 @@ namespace PcStore.Data.Migrations
                     b.ToTable("Brands");
                 });
 
-            modelBuilder.Entity("PcStore.Data.Models.Processor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<float>("ClockFrequency")
-                        .HasColumnType("real");
-
-                    b.Property<int>("CoresCount")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.ToTable("Processors");
-                });
-
             modelBuilder.Entity("PcStore.Data.Models.Review", b =>
                 {
                     b.Property<int>("Id")
@@ -418,6 +393,19 @@ namespace PcStore.Data.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("PcStore.Data.Models.Processor", b =>
+                {
+                    b.HasBaseType("PcStore.Data.Common.Models.Product");
+
+                    b.Property<float>("ClockFrequency")
+                        .HasColumnType("real");
+
+                    b.Property<int>("CoresCount")
+                        .HasColumnType("int");
+
+                    b.HasDiscriminator().HasValue("processor");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("PcStore.Data.Models.ApplicationRole", null)
@@ -473,7 +461,9 @@ namespace PcStore.Data.Migrations
                 {
                     b.HasOne("PcStore.Data.Models.Brand", "Brand")
                         .WithMany()
-                        .HasForeignKey("BrandId");
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("PcStore.Data.Models.Review", b =>
@@ -483,7 +473,7 @@ namespace PcStore.Data.Migrations
                         .HasForeignKey("AuthorId1");
 
                     b.HasOne("PcStore.Data.Common.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("Reviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
