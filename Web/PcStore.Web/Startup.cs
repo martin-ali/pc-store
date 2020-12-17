@@ -1,4 +1,4 @@
-﻿namespace PcStore.Web
+namespace PcStore.Web
 {
     using System.Reflection;
 
@@ -64,6 +64,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<IReviewsService, ReviewsService>();
+            services.AddScoped(typeof(IProductsService<>), typeof(ProductsService<>));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
