@@ -13,7 +13,7 @@ namespace PcStore.Data.Models
         public ApplicationUser Author { get; set; }
 
         [Required]
-        public int AuthorId { get; set; }
+        public string AuthorId { get; set; }
 
         public Product Product { get; set; }
 
