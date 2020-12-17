@@ -5,10 +5,6 @@ namespace PcStore.Data.Models
     using PcStore.Data.Common.Models;
     public class Processor : Product
     {
-        // public Product Product { get; set; }
-
-        public int ProductId { get; set; }
-
         [Required]
         [Display(Name = "Cores count")]
         [Range(1, 128)]
