@@ -28,9 +28,9 @@
 
         public DbSet<Brand> Brands { get; set; }
 
-        public DbSet<Product> Products { get; set; }
-
         public DbSet<Processor> Processors { get; set; }
+
+        public DbSet<Product> Products { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
 
@@ -57,6 +57,12 @@
         {
             // Needed for Identity models configuration
             base.OnModelCreating(builder);
+
+            builder
+                .Entity<Product>()
+                .HasDiscriminator<string>("ProductType")
+                .HasValue<Product>("product")
+                .HasValue<Processor>("processor");
 
             this.ConfigureUserIdentityRelations(builder);
 
@@ -85,7 +91,8 @@
         private static void SetIsDeletedQueryFilter<T>(ModelBuilder builder)
             where T : class, IDeletableEntity
         {
-            builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
+            // FIXME
+            // builder.Entity<T>().HasQueryFilter(e => !e.IsDeleted);
         }
 
         // Applies configurations
