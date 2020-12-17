@@ -1,4 +1,4 @@
-namespace PcStore.Data.Seeding
+﻿namespace PcStore.Data.Seeding
 {
     using System;
     using System.Collections.Generic;
@@ -30,6 +30,7 @@ namespace PcStore.Data.Seeding
                               new BrandsSeeder(),
                               new ProcessorsSeeder(),
                               new UsersSeeder(),
+                              new ReviewsSeeder(),
                           };
 
             foreach (var seeder in seeders)
